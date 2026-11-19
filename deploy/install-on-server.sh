@@ -43,15 +43,17 @@ else
   chmod 600 "$MARKER"
 fi
 
-install -d -o root -g root -m 700 "$DEPLOY_HOME/.ssh"
+install -d -o "$DEPLOY_USER" -g "$DEPLOY_USER" -m 700 "$DEPLOY_HOME/.ssh"
 AUTHORIZED_KEYS=$DEPLOY_HOME/.ssh/authorized_keys
 touch "$AUTHORIZED_KEYS"
-chown root:root "$AUTHORIZED_KEYS"
+chown "$DEPLOY_USER:$DEPLOY_USER" "$AUTHORIZED_KEYS"
 chmod 600 "$AUTHORIZED_KEYS"
 key_line="restrict,command=\"/usr/bin/rrsync -wo $WEB_ROOT\" $(cat "$PUBLIC_KEY")"
 if ! grep -Fqx -- "$key_line" "$AUTHORIZED_KEYS"; then
   printf '%s\n' "$key_line" >> "$AUTHORIZED_KEYS"
 fi
+runuser -u "$DEPLOY_USER" -- test -r "$AUTHORIZED_KEYS" \
+  || fail 'The deployment account cannot read its authorized_keys file.'
 
 # Ownership of the landing directory allows replacing its placeholder.
 # No recursive ownership changes and no nginx edits or reloads are needed.
