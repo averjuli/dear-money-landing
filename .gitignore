@@ -1,0 +1,22 @@
+dist/
+node_modules/
+.preview-browser/
+screenshots/
+.audit/
+
+# Local settings and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.aws/
+.codex/
+.agents/
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
