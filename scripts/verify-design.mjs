@@ -2,13 +2,14 @@ import { spawn } from 'node:child_process';
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import { startDesignServer } from './design-server.mjs';
 
 // Browser QA uses the locally installed Edge and Node's built-in CDP transport.
 // Run the preview first, then: node scripts/verify-design.mjs
-const origin = process.env.PREVIEW_URL || 'http://localhost:4173';
+const origin = process.env.PREVIEW_URL || 'http://localhost:4321';
 const executable = process.env.EDGE_PATH || 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
 const debuggingPort = 9224;
-const compareOriginal = process.argv.includes('--compare-original');
+const compareDesign = process.argv.includes('--compare-design') || process.argv.includes('--compare-original');
 const widths = process.argv.includes('--responsive') ? [280, 320, 360, 375, 393, 430, 600, 768, 1024, 1440] : [393, 1440];
 const browser = spawn(executable, [
   '--headless=new', '--hide-scrollbars', '--disable-gpu', '--no-sandbox', '--no-first-run', '--no-default-browser-check',
@@ -31,7 +32,10 @@ async function connect() {
 }
 
 let socket;
+let referenceServer;
 try {
+  const designPreview = await startDesignServer();
+  referenceServer = designPreview.server;
   socket = new WebSocket(await connect());
   await new Promise((resolve, reject) => { socket.onopen = resolve; socket.onerror = reject; });
   console.log('Connected to Edge');
@@ -64,8 +68,9 @@ try {
   for (const width of widths) {
     await call('Emulation.setDeviceMetricsOverride', { width, height: 900, deviceScaleFactor: 1, mobile: width <= 600 });
     const captures = {};
-    for (const [label, pathname] of [['reference', '/design/index.html'], ['landing', '/']]) {
-      await call('Page.navigate', { url: `${origin}${pathname}` });
+    for (const [label, url] of [['reference', `${designPreview.origin}/design/index.html`], ['landing', `${origin}/`]]) {
+      const navigation = await call('Page.navigate', { url });
+      assert.ok(!navigation.errorText, `Navigation failed for ${url}: ${navigation.errorText}`);
       for (let attempt = 0; attempt < 100; attempt++) {
         if (await evaluate('document.readyState === "complete"')) break;
         await new Promise(resolve => setTimeout(resolve, 200));
@@ -94,7 +99,10 @@ try {
       captures[label] = { ...details, screenshot };
     }
     const { reference, landing } = captures;
-    if (compareOriginal) assert.equal(landing.text, reference.text, `Text must match at ${width}px`);
+    if (compareDesign) {
+      assert.ok(reference.fonts.golos && reference.fonts.unbounded, `Reference brand fonts must load at ${width}px`);
+      assert.equal(landing.text, reference.text, `Text must match at ${width}px`);
+    }
     assert.ok(landing.scrollWidth <= width, `Horizontal overflow at ${width}px`);
     assert.deepEqual(landing.outOfBounds, [], `Elements outside the viewport at ${width}px`);
     assert.deepEqual(landing.smallTouchTargets, [], `Links must be at least 44px high at ${width}px`);
@@ -110,15 +118,15 @@ try {
     })()`);
     assert.equal(anchor.hash, '#how');
     assert.ok(Math.abs(anchor.top) < 1, 'How anchor should scroll into view');
-    report.push({ width, height: landing.height, referenceHeight: reference.height, fonts: landing.fonts, referenceFonts: reference.fonts, originalComparisonRequired: compareOriginal, identicalScreenshots: landing.screenshot.equals(reference.screenshot), textMatches: landing.text === reference.text, appLinks: 3, anchorWorks: true, noHorizontalOverflow: true, allElementsFit: true, touchTargetsAtLeast44px: true });
+    report.push({ width, height: landing.height, referenceHeight: reference.height, fonts: landing.fonts, referenceFonts: reference.fonts, designComparisonRequired: compareDesign, identicalScreenshots: landing.screenshot.equals(reference.screenshot), textMatches: landing.text === reference.text, appLinks: 3, anchorWorks: true, noHorizontalOverflow: true, allElementsFit: true, touchTargetsAtLeast44px: true });
     console.log(JSON.stringify(report.at(-1), null, 2));
   }
   await writeFile('screenshots/report.json', `${JSON.stringify(report, null, 2)}\n`);
-  if (compareOriginal) {
+  if (compareDesign) {
     assert.ok(report.every(result => result.identicalScreenshots), 'Screenshots differ from the reference; inspect screenshots/');
-    console.log('Both viewport screenshots match the reference exactly.');
+    console.log('All viewport screenshots match the current design exactly.');
   } else {
-    console.log(`Layout, fonts, touch targets, links and navigation pass at ${widths.join(', ')}px. Copy revisions intentionally differ from the original design; inspect updated screenshots/.`);
+    console.log(`Layout, fonts, touch targets, links and navigation pass at ${widths.join(', ')}px. Use --compare-design to require matching text and screenshots.`);
   }
   if (!report.every(result => result.fonts.golos && result.fonts.unbounded)) {
     console.log('Required Google Fonts are unavailable. Screenshots use fallback fonts; visual verification with the required fonts remains incomplete. See MANUAL_CHECK.md.');
@@ -126,4 +134,5 @@ try {
 } finally {
   socket?.close();
   browser.kill();
+  if (referenceServer) await new Promise(resolve => referenceServer.close(resolve));
 }

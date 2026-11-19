@@ -1,17 +1,21 @@
+---
+import '../styles/global.css';
+import designTokens from '../styles/tokens.css?raw';
+
+const themeColor = designTokens.match(/--color-bg:\s*([^;]+);/)?.[1].trim();
+---
 <!doctype html>
 <html lang="ru">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Dear Money помогает заранее откладывать на стоматолога, подарки, отпуск и другие расходы. Рассчитайте взносы по конвертам и узнайте, сколько остаётся на жизнь.">
-    <meta name="theme-color" content="#EDF1EE">
+    <meta name="theme-color" content={themeColor}>
     <title>Dear Money — планировщик накоплений</title>
-    <link rel="stylesheet" href="assets/fonts.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   </head>
   <body>
-    <header class="container header">
+    <header class="page-container header">
       <div class="logo">dear money</div>
       <nav class="navigation" aria-label="Навигация">
         <a class="navigation-link" href="#how">Как работает</a>
@@ -20,7 +24,7 @@
     </header>
 
     <main>
-      <section class="container hero" aria-labelledby="hero-title">
+      <section class="page-container hero" aria-labelledby="hero-title">
         <div class="hero-copy">
           <div class="hero-statement">
             <h1 id="hero-title">На важное деньги есть.</h1>
@@ -56,7 +60,7 @@
       </section>
 
       <section id="how" class="surface" aria-labelledby="how-title">
-        <div class="container section how">
+        <div class="page-container section how">
           <h2 id="how-title">Как это работает</h2>
           <ol class="steps">
             <li class="step">
@@ -79,7 +83,7 @@
         </div>
       </section>
 
-      <section class="container section" aria-labelledby="comparison-title">
+      <section class="page-container section" aria-labelledby="comparison-title">
         <h2 id="comparison-title">Не «куда ушли деньги», а «хватит ли на важное»</h2>
         <div class="comparison-grid">
           <div class="comparison-card">
@@ -104,7 +108,7 @@
       </section>
 
       <section class="surface" aria-labelledby="screens-title">
-        <div class="container section">
+        <div class="page-container section">
           <h2 id="screens-title" class="screens-title">Как это выглядит</h2>
           <div class="screens-grid">
             <figure>
@@ -145,7 +149,7 @@
         </div>
       </section>
 
-      <section class="container final-cta" aria-labelledby="start-title">
+      <section class="page-container final-cta" aria-labelledby="start-title">
         <h2 id="start-title">Начните с одного конверта</h2>
         <p class="final-description">Выберите ближайшую трату — например, стрижку или подарок. Посмотрите, сколько нужно откладывать каждый месяц.</p>
         <a class="button button-primary" href="https://app.dearmoney.space/">Создать первый конверт</a>
@@ -153,7 +157,7 @@
     </main>
 
     <footer class="footer">
-      <div class="container footer-content"><div class="footer-logo">dear money</div><div>dearmoney.space</div></div>
+      <div class="page-container footer-content"><div class="footer-logo">dear money</div><div>dearmoney.space</div></div>
     </footer>
   </body>
 </html>

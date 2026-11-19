@@ -1,0 +1,82 @@
+name: Deploy landing
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: landing-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      DEPLOY_HOST: 153.76.175.28
+      DEPLOY_USER: dear-money-landing
+      SITE_URL: https://dearmoney.space
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+
+      - name: Install pnpm
+        run: npm install --global pnpm@12.10.1
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build static landing
+        run: |
+          pnpm build
+          test -s dist/index.html
+          printf '%s\n' "$GITHUB_SHA" > dist/deployment.txt
+
+      - name: Upload landing files
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.LANDING_DEPLOY_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_SSH_KEY"
+          umask 077
+          printf '%s\n' "$DEPLOY_SSH_KEY" > "$RUNNER_TEMP/landing-deploy-key"
+          cp deploy/known_hosts "$RUNNER_TEMP/landing-known-hosts"
+          ssh-keygen -y -f "$RUNNER_TEMP/landing-deploy-key" > /dev/null
+          rsync --archive --compress --delete-delay --delay-updates --safe-links \
+            --chmod=D755,F644 \
+            -e "ssh -i $RUNNER_TEMP/landing-deploy-key -o UserKnownHostsFile=$RUNNER_TEMP/landing-known-hosts -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=20" \
+            dist/ "$DEPLOY_USER@$DEPLOY_HOST:./"
+
+      - name: Verify the deployed version and HTTP 200
+        run: |
+          set -euo pipefail
+          actual_sha=$(curl --fail --silent --show-error --location \
+            --retry 6 --retry-all-errors --retry-delay 3 --max-time 15 \
+            "$SITE_URL/deployment.txt?version=$GITHUB_SHA")
+          test "$actual_sha" = "$GITHUB_SHA"
+          status=$(curl --fail --silent --show-error --location --max-time 30 \
+            --output "$RUNNER_TEMP/landing.html" --write-out '%{http_code}' \
+            "$SITE_URL/")
+          test "$status" = 200
+          grep -Fq '<title>Dear Money' "$RUNNER_TEMP/landing.html"
+          printf 'Deployed commit: %s\nHomepage HTTP status: %s\n' "$actual_sha" "$status"
+          {
+            printf '### Landing deployed\n\n'
+            printf -- '- URL: %s\n' "$SITE_URL"
+            printf -- '- Commit: `%s`\n' "$actual_sha"
+            printf -- '- Homepage: HTTP %s\n' "$status"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Remove the temporary deployment key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/landing-deploy-key"

@@ -3,11 +3,17 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@12.10.1",
   "scripts": {
-    "dev": "node scripts/serve.mjs",
-    "start": "node scripts/serve.mjs",
-    "build": "node scripts/build.mjs",
-    "preview": "node scripts/serve.mjs dist"
+    "dev": "astro dev --host 127.0.0.1 --port 4321",
+    "build": "astro build",
+    "preview": "astro preview --host 127.0.0.1 --port 4321",
+    "verify:design": "node scripts/verify-design.mjs --compare-design"
   },
-  "engines": { "node": ">=20" }
+  "engines": { "node": ">=24.0.0" },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.5",
+    "astro": "7.4.13",
+    "tailwindcss": "4.3.5"
+  }
 }

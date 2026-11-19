@@ -1,156 +1,308 @@
 <!doctype html>
 <html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dear Money</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;600&display=swap">
-<style>
-body{margin:0}
-a{color:#1B6B4D}a:hover{color:#14523B}
-</style>
-</head>
-<body>
-<div style="background: #EDF1EE; color: #14211B; font-family: 'Golos Text', system-ui, sans-serif; min-height: 100vh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Dear Money помогает заранее откладывать на стоматолога, подарки, отпуск и другие расходы. Рассчитайте взносы по конвертам и узнайте, сколько остаётся на жизнь.">
+    <meta name="theme-color" content="#EDF1EE">
+    <title>Dear Money — планировщик накоплений</title>
+    <link rel="stylesheet" href="../public/assets/fonts.css">
+    <style>
+:root {
+  --bg: #edf1ee;
+  --surface: #fff;
+  --ink: #14211b;
+  --ink-body: #3a4740;
+  --ink-muted: #55635c;
+  --accent: #1b6b4d;
+  --accent-strong: #14523b;
+  --accent-soft: #dcebe3;
+  --warn: #a34d14;
+  --warn-strong: #8a4315;
+  --warn-soft: #fbeadd;
+  --warn-bar: #c46a2b;
+  --line: #e3e9e5;
+  --line-page: #d3dcd7;
+  --font-body: "Golos Text", system-ui, sans-serif;
+  --font-heading: "Unbounded", sans-serif;
+  --page-gutter: clamp(16px, 4vw, 40px);
+  --section-space: clamp(48px, 7vw, 96px);
+}
 
-<header style="max-width: 1180px; margin: 0 auto; box-sizing: border-box; padding: 24px clamp(16px, 4vw, 40px); display: flex; align-items: center; justify-content: space-between; gap: 16px">
-<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 22px; color: #1B6B4D">dear money</div>
-<nav aria-label="Навигация" style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap">
-<a href="#how" style="font-size: 15px; font-weight: 500; color: #55635C; text-decoration: none">Как работает</a>
-<a href="https://app.dearmoney.space" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 12px; background: #FFFFFF; color: #14211B; text-decoration: none; font-size: 15px; font-weight: 600">Войти</a>
-</nav>
-</header>
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
 
-<section style="max-width: 1180px; margin: 0 auto; box-sizing: border-box; padding: clamp(24px, 5vw, 64px) clamp(16px, 4vw, 40px) clamp(48px, 7vw, 96px); display: flex; flex-wrap: wrap; align-items: center; gap: clamp(32px, 5vw, 64px)">
-<div style="flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
-<blockquote style="margin: 0; display: flex; flex-direction: column; gap: 14px">
-<p style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: clamp(30px, 4.6vw, 56px); line-height: 1.12; letter-spacing: -0.01em; text-wrap: balance">Деньги на эти цели есть.</p>
-<p style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 500; font-size: clamp(22px, 3vw, 36px); line-height: 1.2; color: #1B6B4D; text-wrap: balance">Потому что вы отложили их заранее.</p>
-</blockquote>
-<p style="margin: 0; max-width: 34em; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.55; color: #3A4740">Dear Money — планировщик накоплений по методу конвертов. Откладывайте понемногу на то, что для вас важно, и знайте заранее, на что хватит.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
-<a href="https://app.dearmoney.space" style="display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 28px; border-radius: 16px; background: #1B6B4D; color: #FFFFFF; text-decoration: none; font-size: 17px; font-weight: 600">Начать копить</a>
-<a href="#how" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 12px; font-size: 16px; font-weight: 600; text-decoration: none">Как это работает</a>
-</div>
-</div>
+img, svg { max-width: 100%; height: auto; }
+h1, h2, h3, p, figcaption { overflow-wrap: break-word; }
 
-<div aria-label="Главный экран приложения" role="img" style="flex: 1 1 300px; max-width: 360px; margin: 0 auto; background: #FFFFFF; border-radius: 36px; padding: 14px; box-shadow: 0 30px 60px -30px rgba(20, 33, 27, 0.35)">
-<div style="background: #EDF1EE; border-radius: 26px; padding: 22px 16px; display: flex; flex-direction: column; gap: 12px">
-<div style="display: flex; justify-content: space-between; align-items: center"><div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 16px; color: #1B6B4D">dear money</div><div style="font-size: 12px; color: #55635C">октябрь</div></div>
-<div style="background: #1B6B4D; color: #FFFFFF; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 4px"><div style="font-size: 12px; color: #DCEBE3">Всего в конвертах</div><div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 24px">275 835 ₽</div><div style="font-size: 11px; color: #DCEBE3">откладывать 72 250 ₽ в месяц</div></div>
-<div style="background: #FFFFFF; border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px"><div style="display: flex; justify-content: space-between; font-size: 13px"><div style="font-weight: 600">На жизнь осталось</div><div style="font-weight: 600">105 091 ₽</div></div><div style="height: 6px; background: #E3E9E5; border-radius: 3px"><div style="width: 18%; height: 6px; background: #1B6B4D; border-radius: 3px"></div></div></div>
-<div style="background: #FFFFFF; border-radius: 16px; padding: 4px 14px; display: flex; flex-direction: column; font-size: 13px">
-<div style="display: flex; justify-content: space-between; min-height: 40px; align-items: center; border-bottom: 1px solid #E3E9E5"><div style="font-weight: 600">Стрижка</div><div style="color: #55635C">на 3 раза</div></div>
-<div style="display: flex; justify-content: space-between; min-height: 40px; align-items: center; border-bottom: 1px solid #E3E9E5"><div style="font-weight: 600">Стоматолог</div><div style="color: #55635C">на 1 раз</div></div>
-<div style="display: flex; justify-content: space-between; min-height: 40px; align-items: center; border-bottom: 1px solid #E3E9E5"><div style="font-weight: 600">Подушка</div><div style="color: #55635C">копится</div></div>
-<div style="display: flex; justify-content: space-between; min-height: 40px; align-items: center"><div style="font-weight: 600; color: #A34D14">Подарки</div><div style="color: #A34D14">−400 ₽</div></div>
-</div>
-</div>
-</div>
-</section>
+a { color: var(--accent); }
+a:hover { color: var(--accent-strong); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
 
-<section id="how" style="background: #FFFFFF">
-<div style="max-width: 1180px; margin: 0 auto; box-sizing: border-box; padding: clamp(48px, 7vw, 96px) clamp(16px, 4vw, 40px); display: flex; flex-direction: column; gap: 40px">
-<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: clamp(26px, 3.4vw, 40px); text-wrap: balance">Как это работает</h2>
-<ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
-<li style="background: #EDF1EE; border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
-<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 40px; color: #1B6B4D">1</div>
-<h3 style="margin: 0; font-size: 20px; font-weight: 600">Создайте конверты</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #3A4740">Стрижка, стоматолог, подарки, отпуск. Укажите, сколько стоит один раз и как часто, и сколько раз хотите держать про запас. Взнос в месяц посчитается сам.</p>
-</li>
-<li style="background: #EDF1EE; border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
-<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 40px; color: #1B6B4D">2</div>
-<h3 style="margin: 0; font-size: 20px; font-weight: 600">Разложите зарплату</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #3A4740">Введите сумму, и взносы разойдутся по конвертам. Если конверт уже полный, его взнос перейдёт в следующий по важности. Всё остальное остаётся на жизнь.</p>
-</li>
-<li style="background: #EDF1EE; border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
-<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 40px; color: #1B6B4D">3</div>
-<h3 style="margin: 0; font-size: 20px; font-weight: 600">Тратьте спокойно</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #3A4740">Внесите трату из конверта и сразу увидите, на сколько раз ещё хватит. Повседневные траты считаются отдельно, с лимитами там, где они нужны.</p>
-</li>
-</ol>
-</div>
-</section>
+.container { max-width: 1180px; margin: 0 auto; box-sizing: border-box; }
+.header { padding: 24px var(--page-gutter); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { font-family: var(--font-heading); font-weight: 600; font-size: 22px; color: var(--accent); }
+.navigation { margin-left: auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.navigation-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; font-weight: 500; color: var(--ink-muted); text-decoration: none; }
+.button { box-sizing: border-box; max-width: 100%; display: inline-flex; align-items: center; text-align: center; text-decoration: none; }
+.button-login { min-height: 44px; padding: 0 18px; border-radius: 12px; background: var(--surface); color: var(--ink); font-size: 15px; font-weight: 600; }
+.button-primary { justify-content: center; min-height: 56px; padding: 0 28px; border-radius: 16px; background: var(--accent); color: var(--surface); font-size: 17px; font-weight: 600; }
+.button-primary:hover { background: var(--accent-strong); color: var(--surface); }
+.button-text { min-height: 56px; padding: 0 12px; font-size: 16px; font-weight: 600; }
 
-<section style="max-width: 1180px; margin: 0 auto; box-sizing: border-box; padding: clamp(48px, 7vw, 96px) clamp(16px, 4vw, 40px); display: flex; flex-direction: column; gap: 32px">
-<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: clamp(26px, 3.4vw, 40px); text-wrap: balance">Не «куда ушли деньги», а «хватит ли на важное»</h2>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px">
-<div style="background: #FFFFFF; border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
-<div style="font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #55635C">Трекер трат</div>
-<p style="margin: 0; font-size: 22px; font-weight: 600">Куда ушли деньги?</p>
-<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.5; color: #3A4740">
-<li>Показывает прошлое</li>
-<li>Стоматолог или подарок на день рождения застают врасплох</li>
-<li>Ясно, сколько потрачено, но не ясно, сколько можно было потратить</li>
-</ul>
-</div>
-<div style="background: #1B6B4D; color: #FFFFFF; border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
-<div style="font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #DCEBE3">Dear Money</div>
-<p style="margin: 0; font-size: 22px; font-weight: 600">Хватит ли мне?</p>
-<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.5; color: #DCEBE3">
-<li>Смотрит вперёд: на сколько раз хватит каждого конверта</li>
-<li>Редкие расходы накоплены заранее</li>
-<li>Видно, сколько осталось на жизнь до следующей зарплаты</li>
-</ul>
-</div>
-</div>
-</section>
+.hero { padding: clamp(24px, 5vw, 64px) var(--page-gutter) var(--section-space); display: flex; flex-wrap: wrap; align-items: center; gap: clamp(32px, 5vw, 64px); }
+.hero-copy { flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 28px; }
+.hero-statement { margin: 0; display: flex; flex-direction: column; gap: 14px; }
+h1 { margin: 0; font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 4.6vw, 56px); line-height: 1.12; letter-spacing: -0.01em; text-wrap: balance; }
+.hero-subtitle { margin: 0; font-family: var(--font-heading); font-weight: 500; font-size: clamp(22px, 3vw, 36px); line-height: 1.2; color: var(--accent); text-wrap: balance; }
+.hero-description { margin: 0; max-width: 34em; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.55; color: var(--ink-body); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 
-<section style="background: #FFFFFF">
-<div style="max-width: 1180px; margin: 0 auto; box-sizing: border-box; padding: clamp(48px, 7vw, 96px) clamp(16px, 4vw, 40px); display: flex; flex-direction: column; gap: 32px">
-<h2 style="margin: 0; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: clamp(26px, 3.4vw, 40px)">Как это выглядит</h2>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
+.phone { box-sizing: border-box; flex: 1 1 328px; min-width: 0; max-width: min(100%, 388px); margin: 0 auto; background: var(--surface); border-radius: 36px; padding: 14px; box-shadow: 0 30px 60px -30px rgb(20 33 27 / 35%); }
+.phone-screen { background: var(--bg); border-radius: 26px; padding: 22px 16px; display: flex; flex-direction: column; gap: 12px; }
+.phone-header { display: flex; justify-content: space-between; align-items: center; }
+.phone-logo { font-family: var(--font-heading); font-weight: 600; font-size: 16px; color: var(--accent); }
+.phone-month { font-size: 12px; color: var(--ink-muted); }
+.balance-card { background: var(--accent); color: var(--surface); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
+.balance-label { font-size: 12px; color: var(--accent-soft); }
+.balance-amount { font-family: var(--font-heading); font-weight: 600; font-size: 24px; }
+.balance-contribution { font-size: 11px; color: var(--accent-soft); }
+.living-card { background: var(--surface); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.living-summary { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; font-weight: 600; }
+.living-bar { height: 6px; background: var(--line); border-radius: 3px; }
+.living-bar > div { width: 18%; height: 6px; background: var(--accent); border-radius: 3px; }
+.envelopes { background: var(--surface); border-radius: 16px; padding: 4px 14px; display: flex; flex-direction: column; font-size: 13px; }
+.envelope { display: flex; justify-content: space-between; min-height: 40px; align-items: center; border-bottom: 1px solid var(--line); }
+.envelope:last-child { border-bottom: 0; }
+.envelope > div:last-child { color: var(--ink-muted); }
+.envelope-name { font-weight: 600; }
+.envelope-warning, .envelope-warning > div:last-child { color: var(--warn); }
 
-<figure style="margin: 0; display: flex; flex-direction: column; gap: 14px">
-<div role="img" aria-label="Экран раскладки зарплаты" style="background: #EDF1EE; border-radius: 26px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
-<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 15px">Пришли деньги</div>
-<div style="background: #FFFFFF; border-radius: 14px; padding: 12px; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 22px">200 000 ₽</div>
-<div style="display: flex; gap: 3px; height: 10px"><div style="width: 36%; background: #1B6B4D; border-radius: 4px 2px 2px 4px"></div><div style="width: 64%; background: #C46A2B; border-radius: 2px 4px 4px 2px"></div></div>
-<div style="background: #FFFFFF; border-radius: 14px; padding: 4px 12px; font-size: 13px"><div style="display: flex; justify-content: space-between; min-height: 34px; align-items: center; border-bottom: 1px solid #E3E9E5"><span>В конверты</span><b>72 250 ₽</b></div><div style="display: flex; justify-content: space-between; min-height: 34px; align-items: center"><span>На жизнь</span><b>127 750 ₽</b></div></div>
-<div style="background: #DCEBE3; color: #14523B; border-radius: 12px; padding: 10px 12px; font-size: 12px; line-height: 1.4">Излишек 8 500 ₽ уйдёт в конверт «Стоматолог»</div>
-</div>
-<figcaption style="font-size: 16px; line-height: 1.45; color: #3A4740"><b style="color: #14211B">Пришла зарплата.</b> Одна сумма, и всё разложено.</figcaption>
-</figure>
+.surface { background: var(--surface); }
+.section { padding: var(--section-space) var(--page-gutter); display: flex; flex-direction: column; gap: 32px; }
+.how { gap: 40px; }
+h2 { margin: 0; font-family: var(--font-heading); font-weight: 600; font-size: clamp(26px, 3.4vw, 40px); text-wrap: balance; }
+.steps { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 20px; }
+.step { background: var(--bg); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px; }
+.step-number { font-family: var(--font-heading); font-weight: 600; font-size: 40px; color: var(--accent); }
+.step h3 { margin: 0; font-size: 20px; font-weight: 600; }
+.step p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink-body); }
+.how-note { margin: 0; padding: 20px 24px; border-radius: 16px; background: var(--accent-soft); color: var(--accent-strong); font-size: 16px; line-height: 1.55; }
+.comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; }
+.comparison-card { background: var(--surface); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 14px; }
+.comparison-label { font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-muted); }
+.comparison-question { margin: 0; font-size: 22px; font-weight: 600; }
+.comparison-card ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.5; color: var(--ink-body); }
+.comparison-card-accent { background: var(--accent); color: var(--surface); }
+.comparison-card-accent .comparison-label, .comparison-card-accent ul { color: var(--accent-soft); }
 
-<figure style="margin: 0; display: flex; flex-direction: column; gap: 14px">
-<div role="img" aria-label="Экран новой траты" style="background: #EDF1EE; border-radius: 26px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
-<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 15px">Новая трата</div>
-<div style="background: #FFFFFF; border-radius: 14px; padding: 12px; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 22px; text-align: center">4 200 ₽</div>
-<div style="display: flex; flex-wrap: wrap; gap: 6px"><span style="padding: 7px 12px; border-radius: 999px; background: #DCEBE3; border: 2px solid #1B6B4D; color: #14523B; font-size: 12px; font-weight: 600">Стрижка</span><span style="padding: 7px 12px; border-radius: 999px; background: #FFFFFF; font-size: 12px">Спортзал</span><span style="padding: 7px 12px; border-radius: 999px; background: #FFFFFF; font-size: 12px">Подарки</span></div>
-<div style="background: #DCEBE3; color: #14523B; border-radius: 12px; padding: 10px 12px; font-size: 12px; line-height: 1.4">В «Стрижке» станет 10 200 ₽, хватит ещё на 2 раза</div>
-</div>
-<figcaption style="font-size: 16px; line-height: 1.45; color: #3A4740"><b style="color: #14211B">Потратили.</b> Сразу видно, что осталось в конверте.</figcaption>
-</figure>
+.screens-title { text-wrap: wrap; }
+.screens-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 20px; }
+.steps > *, .comparison-grid > *, .screens-grid > * { min-width: 0; }
+figure { margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.example-screen { background: var(--bg); border-radius: 26px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.example-title { font-family: var(--font-heading); font-weight: 600; font-size: 15px; }
+.example-amount { background: var(--surface); border-radius: 14px; padding: 12px; font-family: var(--font-heading); font-weight: 600; font-size: 22px; }
+.example-amount-centered { text-align: center; }
+.allocation-bar { display: flex; gap: 3px; height: 10px; }
+.allocation-envelopes { width: 36%; background: var(--accent); border-radius: 4px 2px 2px 4px; }
+.allocation-living { width: 64%; background: var(--warn-bar); border-radius: 2px 4px 4px 2px; }
+.example-rows { background: var(--surface); border-radius: 14px; padding: 4px 12px; font-size: 13px; }
+.example-row { display: flex; justify-content: space-between; gap: 8px; min-height: 34px; align-items: center; border-bottom: 1px solid var(--line); }
+.example-row > * { min-width: 0; overflow-wrap: break-word; }
+.example-row:last-child { border-bottom: 0; }
+.example-hint { background: var(--accent-soft); color: var(--accent-strong); border-radius: 12px; padding: 10px 12px; font-size: 12px; line-height: 1.4; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { padding: 7px 12px; border-radius: 999px; background: var(--surface); font-size: 12px; }
+.chip-selected { background: var(--accent-soft); border: 2px solid var(--accent); color: var(--accent-strong); font-weight: 600; }
+.priority-row { justify-content: normal; gap: 8px; }
+.priority-number { color: var(--ink-muted); font-weight: 600; }
+.priority-name { flex-grow: 1; }
+.priority-full { color: var(--accent); }
+.priority-pending { color: var(--ink-muted); }
+.priority-warning { background: var(--warn-soft); margin: 0 -12px; padding: 0 12px; color: var(--warn-strong); }
+.priority-warning .priority-number { color: var(--warn-strong); }
+figcaption { font-size: 16px; line-height: 1.45; color: var(--ink-body); }
+figcaption b { color: var(--ink); }
 
-<figure style="margin: 0; display: flex; flex-direction: column; gap: 14px">
-<div role="img" aria-label="Экран кошелька «Здоровье» с приоритетами" style="background: #EDF1EE; border-radius: 26px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
-<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 15px">Здоровье</div>
-<div style="background: #FFFFFF; border-radius: 14px; padding: 4px 12px; font-size: 13px">
-<div style="display: flex; gap: 8px; min-height: 34px; align-items: center; border-bottom: 1px solid #E3E9E5"><span style="color: #55635C; font-weight: 600">1</span><span style="flex-grow: 1">Анализы</span><span style="color: #1B6B4D">полный</span></div>
-<div style="display: flex; gap: 8px; min-height: 34px; align-items: center; border-bottom: 1px solid #E3E9E5; background: #FBEADD; margin: 0 -12px; padding: 0 12px"><span style="color: #8A4315; font-weight: 600">2</span><span style="flex-grow: 1; color: #8A4315">Стоматолог</span><span style="color: #8A4315">получит излишек</span></div>
-<div style="display: flex; gap: 8px; min-height: 34px; align-items: center; border-bottom: 1px solid #E3E9E5"><span style="color: #55635C; font-weight: 600">3</span><span style="flex-grow: 1">Врач</span><span style="color: #55635C">копится</span></div>
-<div style="display: flex; gap: 8px; min-height: 34px; align-items: center"><span style="color: #55635C; font-weight: 600">4</span><span style="flex-grow: 1">Массаж</span><span style="color: #1B6B4D">полный</span></div>
-</div>
-</div>
-<figcaption style="font-size: 16px; line-height: 1.45; color: #3A4740"><b style="color: #14211B">Важное первым.</b> Вы решаете, какой конверт наполнять в первую очередь.</figcaption>
-</figure>
+.final-cta { padding: clamp(56px, 8vw, 112px) var(--page-gutter); display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.final-cta h2 { max-width: 18em; line-height: 1.2; }
+.final-description { margin: 0; max-width: 34em; font-size: 18px; line-height: 1.55; color: var(--ink-body); }
+.footer { border-top: 1px solid var(--line-page); }
+.footer-content { padding: 24px var(--page-gutter); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--ink-muted); }
+.footer-logo { font-family: var(--font-heading); font-weight: 600; color: var(--accent); }
 
-</div>
-</div>
-</section>
+@media (max-width: 600px) {
+  .header { padding-top: 16px; padding-bottom: 16px; gap: 8px 12px; }
+  .logo { font-size: clamp(17px, 4.8vw, 22px); }
+  .navigation { gap: 8px; }
+  .navigation-link { font-size: 14px; }
+  .button-login { padding: 0 14px; }
+  .hero { padding-top: 24px; gap: 32px; }
+  .hero-copy { flex: 0 1 auto; width: 100%; gap: 24px; }
+  .hero-actions { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .hero-actions .button { justify-content: center; width: 100%; }
+  .phone { flex: none; width: 100%; }
+  .balance-amount { font-size: clamp(19px, 6vw, 24px); }
+  .section { gap: 28px; }
+  h2 { line-height: 1.25; }
+  .step, .comparison-card { padding: 22px; }
+  .how-note { padding: 20px; }
+  .final-description { font-size: 17px; }
+  .final-cta .button { width: 100%; }
+}
+    </style>
+    <link rel="icon" href="../public/favicon.svg" type="image/svg+xml">
+  </head>
+  <body>
+    <header class="container header">
+      <div class="logo">dear money</div>
+      <nav class="navigation" aria-label="Навигация">
+        <a class="navigation-link" href="#how">Как работает</a>
+        <a class="button button-login" href="https://app.dearmoney.space/">Войти</a>
+      </nav>
+    </header>
 
-<section style="max-width: 1180px; margin: 0 auto; box-sizing: border-box; padding: clamp(56px, 8vw, 112px) clamp(16px, 4vw, 40px); display: flex; flex-direction: column; align-items: flex-start; gap: 24px">
-<h2 style="margin: 0; max-width: 18em; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.2; text-wrap: balance">Начните с одного конверта</h2>
-<a href="https://app.dearmoney.space" style="display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 28px; border-radius: 16px; background: #1B6B4D; color: #FFFFFF; text-decoration: none; font-size: 17px; font-weight: 600">Начать копить</a>
-</section>
+    <main>
+      <section class="container hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="hero-statement">
+            <h1 id="hero-title">На важное деньги есть.</h1>
+            <p class="hero-subtitle">Потому что вы отложили их заранее.</p>
+          </div>
+          <p class="hero-description">Dear Money помогает заранее откладывать на стоматолога, подарки, отпуск и другие расходы. Создайте конверты — приложение рассчитает, сколько откладывать каждый месяц, и покажет, сколько остаётся на повседневную жизнь.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://app.dearmoney.space/">Начать копить</a>
+            <a class="button button-text" href="#how">Как это работает</a>
+          </div>
+        </div>
 
-<footer style="border-top: 1px solid #D3DCD7">
-<div style="max-width: 1180px; margin: 0 auto; box-sizing: border-box; padding: 24px clamp(16px, 4vw, 40px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; color: #55635C">
-<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; color: #1B6B4D">dear money</div>
-<div>dearmoney.space</div>
-</div>
-</footer>
+        <div class="phone" aria-label="Главный экран приложения" role="img">
+          <div class="phone-screen">
+            <div class="phone-header"><div class="phone-logo">dear money</div><div class="phone-month">октябрь</div></div>
+            <div class="balance-card">
+              <div class="balance-label">Всего в конвертах</div>
+              <div class="balance-amount">275 835 ₽</div>
+              <div class="balance-contribution">откладывать 72 250 ₽ в месяц</div>
+            </div>
+            <div class="living-card">
+              <div class="living-summary"><div>На жизнь осталось</div><div>105 091 ₽</div></div>
+              <div class="living-bar"><div></div></div>
+            </div>
+            <div class="envelopes">
+              <div class="envelope"><div class="envelope-name">Стрижка</div><div>на 3 раза</div></div>
+              <div class="envelope"><div class="envelope-name">Стоматолог</div><div>на 1 раз</div></div>
+              <div class="envelope"><div class="envelope-name">Подушка</div><div>копится</div></div>
+              <div class="envelope envelope-warning"><div class="envelope-name">Подарки</div><div>−400 ₽</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-</div>
-</body>
+      <section id="how" class="surface" aria-labelledby="how-title">
+        <div class="container section how">
+          <h2 id="how-title">Как это работает</h2>
+          <ol class="steps">
+            <li class="step">
+              <div class="step-number" aria-hidden="true">1</div>
+              <h3>Создайте конверты</h3>
+              <p>На стоматолога, подарки, отпуск — на каждый расход свой конверт. Укажите стоимость и частоту: Dear Money рассчитает сумму, которую нужно откладывать каждый месяц.</p>
+            </li>
+            <li class="step">
+              <div class="step-number" aria-hidden="true">2</div>
+              <h3>Распределите доход</h3>
+              <p>Введите полученную сумму. Приложение распределит её по конвертам с учётом ваших приоритетов и покажет, сколько остаётся на жизнь.</p>
+            </li>
+            <li class="step">
+              <div class="step-number" aria-hidden="true">3</div>
+              <h3>Тратьте спокойно</h3>
+              <p>Запишите расход — и сразу увидите остаток в конверте и на сколько раз его ещё хватит.</p>
+            </li>
+          </ol>
+          <p class="how-note">Конверты — ваш план распределения денег. Сами деньги остаются на ваших счетах. Доходы и траты вы вносите вручную.</p>
+        </div>
+      </section>
+
+      <section class="container section" aria-labelledby="comparison-title">
+        <h2 id="comparison-title">Не «куда ушли деньги», а «хватит ли на важное»</h2>
+        <div class="comparison-grid">
+          <div class="comparison-card">
+            <div class="comparison-label">Трекер трат</div>
+            <p class="comparison-question">Куда ушли деньги?</p>
+            <ul>
+              <li>История покупок и платежей</li>
+              <li>Расходы по категориям: продукты, транспорт, развлечения</li>
+              <li>Итоги: сколько потрачено за месяц</li>
+            </ul>
+          </div>
+          <div class="comparison-card comparison-card-accent">
+            <div class="comparison-label">Dear Money</div>
+            <p class="comparison-question">На что уже хватает?</p>
+            <ul>
+              <li>Видно, на сколько раз хватит денег в каждом конверте</li>
+              <li>Понятно, сколько уже отложено на редкие расходы и сколько ещё нужно накопить</li>
+              <li>Видно, сколько осталось на жизнь до следующей зарплаты</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="surface" aria-labelledby="screens-title">
+        <div class="container section">
+          <h2 id="screens-title" class="screens-title">Как это выглядит</h2>
+          <div class="screens-grid">
+            <figure>
+              <div class="example-screen" role="img" aria-label="Экран раскладки зарплаты">
+                <div class="example-title">Пришли деньги</div>
+                <div class="example-amount">200 000 ₽</div>
+                <div class="allocation-bar"><div class="allocation-envelopes"></div><div class="allocation-living"></div></div>
+                <div class="example-rows">
+                  <div class="example-row"><span>В конверты</span><b>72 250 ₽</b></div>
+                  <div class="example-row"><span>На жизнь</span><b>127 750 ₽</b></div>
+                </div>
+                <div class="example-hint">В плане: ещё 8 500 ₽ на «Стоматолога» — следующий по важности конверт</div>
+              </div>
+              <figcaption><b>Пришёл доход.</b> Введите сумму — увидите взносы по конвертам и остаток на жизнь.</figcaption>
+            </figure>
+            <figure>
+              <div class="example-screen" role="img" aria-label="Экран новой траты">
+                <div class="example-title">Новая трата</div>
+                <div class="example-amount example-amount-centered">4 200 ₽</div>
+                <div class="chips"><span class="chip chip-selected">Стрижка</span><span class="chip">Спортзал</span><span class="chip">Подарки</span></div>
+                <div class="example-hint">В «Стрижке» станет 10 200 ₽, хватит ещё на 2 раза</div>
+              </div>
+              <figcaption><b>Записали расход.</b> Сразу видно, сколько осталось и на сколько раз ещё хватит.</figcaption>
+            </figure>
+            <figure>
+              <div class="example-screen" role="img" aria-label="Экран кошелька «Здоровье» с приоритетами">
+                <div class="example-title">Здоровье</div>
+                <div class="example-rows">
+                  <div class="example-row priority-row"><span class="priority-number">1</span><span class="priority-name">Анализы</span><span class="priority-full">полный</span></div>
+                  <div class="example-row priority-row priority-warning"><span class="priority-number">2</span><span class="priority-name">Стоматолог</span><span>получит излишек</span></div>
+                  <div class="example-row priority-row"><span class="priority-number">3</span><span class="priority-name">Врач</span><span class="priority-pending">копится</span></div>
+                  <div class="example-row priority-row"><span class="priority-number">4</span><span class="priority-name">Массаж</span><span class="priority-full">полный</span></div>
+                </div>
+              </div>
+              <figcaption><b>Важное первым.</b> Выберите порядок конвертов. Если один уже полный, его взнос пополнит следующий.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="container final-cta" aria-labelledby="start-title">
+        <h2 id="start-title">Начните с одного конверта</h2>
+        <p class="final-description">Выберите ближайшую трату — например, стрижку или подарок. Посмотрите, сколько нужно откладывать каждый месяц.</p>
+        <a class="button button-primary" href="https://app.dearmoney.space/">Создать первый конверт</a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content"><div class="footer-logo">dear money</div><div>dearmoney.space</div></div>
+    </footer>
+  </body>
 </html>
