@@ -4,25 +4,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Dear Money помогает заранее откладывать на стоматолога, подарки, отпуск и другие расходы. Рассчитайте взносы по конвертам и узнайте, сколько остаётся на жизнь.">
-    <meta name="theme-color" content="#EDF1EE">
+    <meta name="theme-color" content="#f6f5fa">
     <title>Dear Money — планировщик накоплений</title>
     <link rel="stylesheet" href="../public/assets/fonts.css">
     <style>
 :root {
-  --bg: #edf1ee;
+  --bg: #f6f5fa;
   --surface: #fff;
-  --ink: #14211b;
-  --ink-body: #3a4740;
-  --ink-muted: #55635c;
-  --accent: #1b6b4d;
-  --accent-strong: #14523b;
-  --accent-soft: #dcebe3;
-  --warn: #a34d14;
-  --warn-strong: #8a4315;
-  --warn-soft: #fbeadd;
-  --warn-bar: #c46a2b;
-  --line: #e3e9e5;
-  --line-page: #d3dcd7;
+  --surface-sunken: #eeeff8;
+  --ink: #17171c;
+  --ink-body: #626477;
+  --ink-muted: #626477;
+  --accent: #4157d6;
+  --accent-strong: #3449bd;
+  --accent-soft: #e3e5fc;
+  --warn: #b44420;
+  --warn-strong: #963617;
+  --warn-soft: #fff0e8;
+  --warn-bar: #c65b36;
+  --line: #e1e2ed;
+  --line-page: #e1e2ed;
   --font-body: "Golos Text", system-ui, sans-serif;
   --font-heading: "Unbounded", sans-serif;
   --page-gutter: clamp(16px, 4vw, 40px);
@@ -50,7 +51,7 @@ a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
 .navigation { margin-left: auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 .navigation-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; font-weight: 500; color: var(--ink-muted); text-decoration: none; }
 .button { box-sizing: border-box; max-width: 100%; display: inline-flex; align-items: center; text-align: center; text-decoration: none; }
-.button-login { min-height: 44px; padding: 0 18px; border-radius: 12px; background: var(--surface); color: var(--ink); font-size: 15px; font-weight: 600; }
+.button-login { min-height: 44px; padding: 0 18px; border-radius: 14px; background: var(--surface); color: var(--ink); font-size: 15px; font-weight: 600; }
 .button-primary { justify-content: center; min-height: 56px; padding: 0 28px; border-radius: 16px; background: var(--accent); color: var(--surface); font-size: 17px; font-weight: 600; }
 .button-primary:hover { background: var(--accent-strong); color: var(--surface); }
 .button-text { min-height: 56px; padding: 0 12px; font-size: 16px; font-weight: 600; }
@@ -63,20 +64,20 @@ h1 { margin: 0; font-family: var(--font-heading); font-weight: 600; font-size: c
 .hero-description { margin: 0; max-width: 34em; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.55; color: var(--ink-body); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 
-.phone { box-sizing: border-box; flex: 1 1 328px; min-width: 0; max-width: min(100%, 388px); margin: 0 auto; background: var(--surface); border-radius: 36px; padding: 14px; box-shadow: 0 30px 60px -30px rgb(20 33 27 / 35%); }
+.phone { box-sizing: border-box; flex: 1 1 328px; min-width: 0; max-width: min(100%, 388px); margin: 0 auto; background: var(--surface); border-radius: 36px; padding: 14px; box-shadow: 0 30px 60px -30px rgb(65 87 214 / 25%); }
 .phone-screen { background: var(--bg); border-radius: 26px; padding: 22px 16px; display: flex; flex-direction: column; gap: 12px; }
 .phone-header { display: flex; justify-content: space-between; align-items: center; }
 .phone-logo { font-family: var(--font-heading); font-weight: 600; font-size: 16px; color: var(--accent); }
 .phone-month { font-size: 12px; color: var(--ink-muted); }
-.balance-card { background: var(--accent); color: var(--surface); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
+.balance-card { background: var(--accent); color: var(--surface); border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
 .balance-label { font-size: 12px; color: var(--accent-soft); }
 .balance-amount { font-family: var(--font-heading); font-weight: 600; font-size: 24px; }
 .balance-contribution { font-size: 11px; color: var(--accent-soft); }
-.living-card { background: var(--surface); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.living-card { background: var(--surface); border-radius: 20px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
 .living-summary { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; font-weight: 600; }
 .living-bar { height: 6px; background: var(--line); border-radius: 3px; }
 .living-bar > div { width: 18%; height: 6px; background: var(--accent); border-radius: 3px; }
-.envelopes { background: var(--surface); border-radius: 16px; padding: 4px 14px; display: flex; flex-direction: column; font-size: 13px; }
+.envelopes { background: var(--surface); border-radius: 20px; padding: 4px 14px; display: flex; flex-direction: column; font-size: 13px; }
 .envelope { display: flex; justify-content: space-between; min-height: 40px; align-items: center; border-bottom: 1px solid var(--line); }
 .envelope:last-child { border-bottom: 0; }
 .envelope > div:last-child { color: var(--ink-muted); }
@@ -88,7 +89,7 @@ h1 { margin: 0; font-family: var(--font-heading); font-weight: 600; font-size: c
 .how { gap: 40px; }
 h2 { margin: 0; font-family: var(--font-heading); font-weight: 600; font-size: clamp(26px, 3.4vw, 40px); text-wrap: balance; }
 .steps { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 20px; }
-.step { background: var(--bg); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px; }
+.step { background: var(--surface-sunken); border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 12px; }
 .step-number { font-family: var(--font-heading); font-weight: 600; font-size: 40px; color: var(--accent); }
 .step h3 { margin: 0; font-size: 20px; font-weight: 600; }
 .step p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink-body); }
@@ -105,18 +106,18 @@ h2 { margin: 0; font-family: var(--font-heading); font-weight: 600; font-size: c
 .screens-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 20px; }
 .steps > *, .comparison-grid > *, .screens-grid > * { min-width: 0; }
 figure { margin: 0; display: flex; flex-direction: column; gap: 14px; }
-.example-screen { background: var(--bg); border-radius: 26px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.example-screen { background: var(--surface-sunken); border-radius: 24px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
 .example-title { font-family: var(--font-heading); font-weight: 600; font-size: 15px; }
 .example-amount { background: var(--surface); border-radius: 14px; padding: 12px; font-family: var(--font-heading); font-weight: 600; font-size: 22px; }
 .example-amount-centered { text-align: center; }
 .allocation-bar { display: flex; gap: 3px; height: 10px; }
 .allocation-envelopes { width: 36%; background: var(--accent); border-radius: 4px 2px 2px 4px; }
 .allocation-living { width: 64%; background: var(--warn-bar); border-radius: 2px 4px 4px 2px; }
-.example-rows { background: var(--surface); border-radius: 14px; padding: 4px 12px; font-size: 13px; }
+.example-rows { background: var(--surface); border-radius: 20px; padding: 4px 12px; font-size: 13px; }
 .example-row { display: flex; justify-content: space-between; gap: 8px; min-height: 34px; align-items: center; border-bottom: 1px solid var(--line); }
 .example-row > * { min-width: 0; overflow-wrap: break-word; }
 .example-row:last-child { border-bottom: 0; }
-.example-hint { background: var(--accent-soft); color: var(--accent-strong); border-radius: 12px; padding: 10px 12px; font-size: 12px; line-height: 1.4; }
+.example-hint { background: var(--accent-soft); color: var(--accent-strong); border-radius: 16px; padding: 10px 12px; font-size: 12px; line-height: 1.4; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { padding: 7px 12px; border-radius: 999px; background: var(--surface); font-size: 12px; }
 .chip-selected { background: var(--accent-soft); border: 2px solid var(--accent); color: var(--accent-strong); font-weight: 600; }

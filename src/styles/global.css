@@ -2,7 +2,7 @@
 @import "./tokens.css";
 @import "tailwindcss/utilities.css" layer(utilities);
 @source "../pages";
-/* Preflight is omitted to preserve the approved reference layout. */
+/* Preflight is omitted to preserve the reference layout. */
 body {
   @apply font-body;
   margin: var(--spacing-0);
@@ -73,7 +73,7 @@ a:focus-visible {
   @apply font-semibold;
   min-height: var(--spacing-44);
   padding: var(--spacing-0) var(--spacing-18);
-  border-radius: var(--radius-12);
+  border-radius: var(--radius-control);
   background: var(--color-surface);
   color: var(--color-ink);
   font-size: var(--text-15);
@@ -83,7 +83,7 @@ a:focus-visible {
   @apply justify-center font-semibold;
   min-height: var(--spacing-56);
   padding: var(--spacing-0) var(--spacing-28);
-  border-radius: var(--radius-16);
+  border-radius: var(--radius-button);
   background: var(--color-accent);
   color: var(--color-surface);
   font-size: var(--text-17);
@@ -188,7 +188,7 @@ h1 {
   @apply flex flex-col;
   background: var(--color-accent);
   color: var(--color-surface);
-  border-radius: var(--radius-16);
+  border-radius: var(--radius-card);
   padding: var(--spacing-14);
   gap: var(--spacing-4);
 }
@@ -211,7 +211,7 @@ h1 {
 .living-card {
   @apply flex flex-col;
   background: var(--color-surface);
-  border-radius: var(--radius-16);
+  border-radius: var(--radius-card);
   padding: var(--spacing-12) var(--spacing-14);
   gap: var(--spacing-8);
 }
@@ -238,7 +238,7 @@ h1 {
 .envelopes {
   @apply flex flex-col;
   background: var(--color-surface);
-  border-radius: var(--radius-16);
+  border-radius: var(--radius-card);
   padding: var(--spacing-4) var(--spacing-14);
   font-size: var(--text-13);
 }
@@ -297,8 +297,8 @@ h2 {
 
 .step {
   @apply flex flex-col;
-  background: var(--color-bg);
-  border-radius: var(--radius-24);
+  background: var(--color-surface-sunken);
+  border-radius: var(--radius-card);
   padding: var(--spacing-26);
   gap: var(--spacing-12);
 }
@@ -341,7 +341,7 @@ h2 {
 .comparison-card {
   @apply flex flex-col;
   background: var(--color-surface);
-  border-radius: var(--radius-24);
+  border-radius: var(--radius-card-lg);
   padding: var(--spacing-26);
   gap: var(--spacing-14);
 }
@@ -401,8 +401,8 @@ figure {
 
 .example-screen {
   @apply flex flex-col;
-  background: var(--color-bg);
-  border-radius: var(--radius-26);
+  background: var(--color-surface-sunken);
+  border-radius: var(--radius-card-lg);
   padding: var(--spacing-18);
   gap: var(--spacing-10);
 }
@@ -415,7 +415,7 @@ figure {
 .example-amount {
   @apply font-semibold font-heading;
   background: var(--color-surface);
-  border-radius: var(--radius-14);
+  border-radius: var(--radius-control);
   padding: var(--spacing-12);
   font-size: var(--text-22);
 }
@@ -444,7 +444,7 @@ figure {
 
 .example-rows {
   background: var(--color-surface);
-  border-radius: var(--radius-14);
+  border-radius: var(--radius-card);
   padding: var(--spacing-4) var(--spacing-12);
   font-size: var(--text-13);
 }
@@ -468,7 +468,7 @@ figure {
 .example-hint {
   background: var(--color-accent-soft);
   color: var(--color-accent-strong);
-  border-radius: var(--radius-12);
+  border-radius: var(--radius-button);
   padding: var(--spacing-10) var(--spacing-12);
   font-size: var(--text-12);
   line-height: var(--leading-1-4);
